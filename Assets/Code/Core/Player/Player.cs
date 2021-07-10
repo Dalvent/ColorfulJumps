@@ -18,6 +18,8 @@ public class Player : BoxCharacter
     [SerializeField] private GravityDashPlayerState _gravityDashPlayerState;
 
     [SerializeField] private PlayerState _currentStateEnum;
+    
+    [SerializeField] private List<SpriteRenderer> _spritesToChangeColor;
 
     public BasePlayerState CurrentState
     {
@@ -34,8 +36,6 @@ public class Player : BoxCharacter
             }
         }
     }
-    
-    public SpriteRenderer SpriteRenderer { get; private set; }
 
     public bool IsDead { get; private set; }
     protected override void Start()
@@ -43,7 +43,6 @@ public class Player : BoxCharacter
         InitStates();
         base.Start();
         
-        SpriteRenderer = GetComponent<SpriteRenderer>();
         ApplyCurrentState();
     }
 
@@ -74,7 +73,10 @@ public class Player : BoxCharacter
 
     private void ApplyCurrentState()
     {
-        SpriteRenderer.color = CurrentState.OnSetColor;
+        foreach (var spriteToChangeColor in _spritesToChangeColor)
+        {
+            spriteToChangeColor.color = CurrentState.OnSetColor;
+        }
         CurrentState.OnStateStartUse();
     }
     

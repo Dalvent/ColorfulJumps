@@ -52,6 +52,7 @@ namespace Code.Core
         {
             GenerateLines(GenerateLineCount());
             GenerateSpikes();
+            GenerateStars();
         }
 
         private void GenerateSpikes()
@@ -94,6 +95,10 @@ namespace Code.Core
                         break;
                 }
             }
+        }
+        
+        private void GenerateStars()
+        {
         }
         
         private void GenerateLines(int lineCount)
